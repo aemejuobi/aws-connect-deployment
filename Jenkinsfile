@@ -5,20 +5,20 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                terraform init
+                sh 'terraform init'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                terraform plan
-                terraform validate
+                sh 'terraform plan'
+                sh 'terraform validate'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                terraform apply -auto-approve
+                sh 'terraform apply -auto-approve'
             }
         }
     }
