@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'cd connect_infrastructure/'
                 echo 'Building..'
                 sh 'terraform init'
             }
