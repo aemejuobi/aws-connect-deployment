@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'cd connect_infrastructure'
+                sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Testing..'
                 sh 'terraform plan'
                 sh 'terraform validate'
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'cd connect_infrastructure'
+                sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Deploying....'
                 sh 'terraform apply -auto-approve'
             }
