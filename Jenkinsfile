@@ -1,15 +1,21 @@
 pipeline {
     agent any
 
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        TF_IN_AUTOMATION      = '1'
+    }
+
     stages {
-        stage('Build') {
+        stage('init') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Building..'
                 sh 'terraform init'
             }
         }
-        stage('Test') {
+        stage('plan/validate') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Testing..'
@@ -17,7 +23,7 @@ pipeline {
                 sh 'terraform validate'
             }
         }
-        stage('Deploy') {
+        stage('apply') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Deploying....'
