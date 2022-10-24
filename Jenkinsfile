@@ -17,7 +17,7 @@ pipeline {
                 sh 'terraform validate'
             }
         }
-        stage('Apply') {
+        stage('apply') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Deploying....'
