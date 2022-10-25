@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Init') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Building..'
                 sh 'terraform init'
             }
         }
-        stage('Test') {
+        stage('Plan/Validate') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Testing..'
@@ -17,7 +17,7 @@ pipeline {
                 sh 'terraform validate'
             }
         }
-        stage('Deploy') {
+        stage('Apply') {
             steps {
                 sh 'cd connect_infrastructure && ls && pwd'
                 echo 'Deploying....'
